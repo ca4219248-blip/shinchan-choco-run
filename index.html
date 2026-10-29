@@ -161,7 +161,7 @@ function fs(){const e=document.documentElement;try{if(document.fullscreenElement
  if(innerHeight>innerWidth&&screen.orientation&&screen.orientation.lock)screen.orientation.lock('portrait').catch(()=>{})}catch(x){}}
 const coarse=()=>matchMedia('(pointer:coarse)').matches;
 const sndBtns=re=>[[sv.mus?'🎵 Music: ON':'🎵 Music: OFF',()=>{sv.mus^=1;audioApply();save();re()},'s'],[sv.sfx?'🔊 SFX: ON':'🔊 SFX: OFF',()=>{sv.sfx^=1;audioApply();save();re()},'s']];
-function mainMenu(){st='menu';menu('SHINCHAN CHOCO RUN',`Hi-Score ${pad(sv.hi)} · Total Choco Chips: ${sv.chips}${sv.ak?' · 👹 Secret found!':''} · ${cloudNote()}`,[[sv.un>1||sv.hi?`▶ Continue (Level ${sv.un})`:'▶ Play',()=>{if(coarse()&&!document.fullscreenElement)fs();startLevel(sv.un-1,1)}],['Level Select',lvSel],['☁️ Cloud Sync',syncMenu,'s'],['⛶ Fullscreen',fs,'s'],...sndBtns(mainMenu),['Reset Save',()=>{if(confirm('Saara progress delete karna hai?')){sv={hi:0,un:1,chips:0,mus:sv.mus,sfx:sv.sfx};save();mainMenu()}},'s']],'idle0')}
+function mainMenu(){st='menu';M.dataset.sc='0';menu('SHINCHAN CHOCO RUN',`Hi-Score ${pad(sv.hi)} · Total Choco Chips: ${sv.chips}${sv.ak?' · 👹 Secret found!':''} · ${cloudNote()}`,[[sv.un>1||sv.hi?`▶ Continue (Level ${sv.un})`:'▶ Play',()=>{if(coarse()&&!document.fullscreenElement)fs();startLevel(sv.un-1,1)}],['Level Select',lvSel],['☁️ Cloud Sync',syncMenu,'s'],['⛶ Fullscreen',fs,'s'],...sndBtns(mainMenu),['Reset Save',()=>{if(confirm('Saara progress delete karna hai?')){sv={hi:0,un:1,chips:0,mus:sv.mus,sfx:sv.sfx};save();mainMenu()}},'s']],'idle0')}
 function syncNote(){
  const el=document.getElementById('cs');
  if(el)el.textContent=cloudNote()+(cloud.err?' ('+cloud.err+')':'')+(cloud.code?'':'');
