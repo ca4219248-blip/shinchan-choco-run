@@ -1,6 +1,6 @@
 # Shinchan Choco Run
 
-A single-file HTML5 canvas platformer that runs entirely in the browser. No build step, no dependencies — just open the page and play.
+A single-file HTML5 canvas platformer that runs entirely in the browser. No build step, no dependencies — open the page and play.
 
 **Play:** https://ca4219248-blip.github.io/shinchan-choco-run/
 
@@ -9,9 +9,18 @@ A single-file HTML5 canvas platformer that runs entirely in the browser. No buil
 - Desktop: Arrow keys / A-D to move, Space or Up to jump, P or Esc to pause.
 - Mobile: on-screen left / right / JUMP buttons (shown automatically on touch devices).
 
+## What's in the game
+
+- **20 levels**, generated from a fixed seed per level — every player sees the same level 7, but the layout is procedural rather than hand-placed. Difficulty scales with the level number: gaps get wider, moms throw pans faster, and their walk speed rises.
+- **5 visual themes** that cycle by level — daylight, sunset, night with stars, pink, and mint — each with its own sky gradient and colour overlay.
+- **Level select grid** showing all 20 levels, locked ones greyed out. Progress unlocks two levels at a time.
+- **Question blocks**: hit one from below for 50 points, and sometimes for the Action Kamen power-up — a short invincible dash form that also ignores moms.
+- **Secret**: staying safe for 600 ticks also triggers the power-up once per save, and marks the save with the hidden character.
+- Mom throws pans, trash bins and gaps hurt, 3 hearts per life, 25 chips = 1 extra life.
+
 ## Cloud save (Supabase)
 
-Progress used to live only in the browser's `localStorage`. Now every save is written in two places:
+Progress is written in two places:
 
 1. `localStorage` — instant, works offline.
 2. Supabase Postgres — a cloud backup keyed by a **sync code** the game generates for the player.
@@ -54,3 +63,4 @@ The browser only ever holds the project's publishable (public) API key — never
 
 - Sound is generated with the Web Audio API; nothing is downloaded at runtime except the Supabase requests.
 - If the cloud is unreachable the game keeps saving locally and shows `Cloud: offline` — no progress is lost.
+- Save schema is versioned (`v: 2`). Older saves without a field still load, because every field falls back to a default.
